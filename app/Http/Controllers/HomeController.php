@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Warehouse;
 use App\Products;
+use App\Stock;
 
 class HomeController extends Controller
 {
@@ -53,6 +54,44 @@ class HomeController extends Controller
     }
 
     public function purchaseorder(Request $req) {
-        $warehouseid = $req->get('warehouseid');
+        $warehouse = $req->get("warehouse");
+        $batchid = $req->get("batchid");
+        $productname = $req->get("product");
+        $productid = $req->get("productid");
+        $quantity = $req->get("quantity");
+        $cost = $req->get("totalcost");
+        $expiry = $req->get("expiry");
+
+        if(!$productid){
+            return back()->with('success','Please select product to create P.O!');
+        }
+
+        if(!$quantity){
+            return back()->with('success','Please enter quantity!');
+        }
+
+        $productObj = Products::find($productid);
+        $prodctstock = Stock::where('product_id','=', $productObj->id)->get();
+        $prodctstock[0]->quantity += $quantity;
+        $prodctstock[0]->save();
+
+        return redirect()->route('home');
+        
+    }
+
+    public function search(Request $req){
+        $search = $req->get('term');
+      
+        $result = Products::where('name', 'LIKE', '%'. $search. '%')->select('id as product_id', 'name as value')->get();
+
+        return response($result->toArray());
+    }
+
+    public function search2(Request $req) {
+        $search = $req->get('term');
+      
+        $result = Warehouse::where('name', 'LIKE', '%'. $search. '%')->select('id as warehouse_id', 'name as value')->get();
+
+        return response($result->toArray());
     }
 }

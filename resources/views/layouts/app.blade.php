@@ -18,6 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -55,11 +60,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        {{ __('Home') }}
-                                    </a>
 
                                     @can('see warehouses')
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            {{ __('Home') }}
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('warehouselist') }}">
                                             {{ __('Warehouses') }}
                                         </a>
@@ -86,5 +91,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('script')
 </body>
 </html>

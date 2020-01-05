@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Stock;
+use App\Purchaseorder;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -16,9 +16,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Stock::class, function (Faker $faker) {
+$factory->define(Purchaseorder::class, function (Faker $faker) {
     return [
-        'quantity' => $faker->randomDigit(1, 50),
+        'warehouse_id' => $faker->randomDigit(1, 10),
         'product_id' => $faker->randomDigit(1, 10)
     ];
 });

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12 col-xs-8 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header" style="display: flex;justify-content: space-between;align-items:center;">
                     <div>
@@ -31,7 +31,7 @@
                                         <th>Sr. No</th>
                                         <th>Name</th>
                                         <th>Price</th>
-                                        <!-- <th>Quantity</th> -->
+                                        <th>Stock Available</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,7 +40,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $product->name }}</td>
                                             <td>{{ number_format($product->price, 2, '.', '') }}</td>
-                                            <!-- <td>{{ $product->quantity}}</td> -->
+                                            <td>@if($product->stock) {{ $product->stock->quantity }} @else -- @endif</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

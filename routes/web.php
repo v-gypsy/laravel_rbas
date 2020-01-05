@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create', 'HomeController@createpo')->name('createpo');
 Route::get('/warehouses', 'HomeController@warehouselist')->name('warehouselist');
-Route::get('/purchaseorder', 'HomeController@purchaseorder')->name('purchaseorder');
+Route::post('/purchaseorder', 'HomeController@purchaseorder')->name('purchaseorder');
+Route::post('/autocomplete', 'HomeController@search')->name('autocomplete');
+Route::post('/autocomplete2', 'HomeController@search2')->name('autocomplete2');
